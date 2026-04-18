@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# User data saved by the tool
+/data/
+/media/
+/config/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files (may contain API keys)
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
