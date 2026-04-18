@@ -4,7 +4,7 @@
   "version": "5.0.2",
   "license": "MIT",
   "scripts": {
-    "setup": "npm ci --omit-dev && npm link",
+    "setup": "npm ci --omit-dev && npm link --force",
     "cli": "node .",
     "auto-fetch": "node src/commands.mjs auto-fetch",
     "remove-deleted": "node src/commands.mjs remove-deleted",
