@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import confirm from '@inquirer/confirm';
 import { fileExists, listDirectory, readFile, wait } from './utils.mjs';
 import { APP_DIRECTORY, CONFIG, OS, clearTerminal } from './cli.mjs';
-import { forEachGeneration, getGeneratedMediaInfo, mediaFilepath, getFirstGenerationId, saveGenerations, getGenerationImages, DOWNLOAD_TYPES_MOD } from './generations.mjs';
+import { forEachGeneration, getGeneratedMediaInfo, mediaFilepath, getFirstGenerationId, saveGenerations, getGenerationImages, isVideoMediaId, DOWNLOAD_TYPES_MOD } from './generations.mjs';
 import { getPostDates, postsDataDir, postImageFilepath } from './posts.mjs';
 import { requestKey } from './keyActions.mjs';
 import { getAllRequests } from './civitaiApi.mjs';
@@ -649,7 +649,7 @@ export async function countDownloads ({ onProgress } = {}) {
     for (const item of media) {
       const filepath = mediaFilepath(item);
       if (await fileExists(filepath)) {
-        if (item.mediaId.endsWith('.mp4')) {
+        if (isVideoMediaId(item.mediaId)) {
           report.genVideos++;
         } else {
           report.genImages++;

@@ -13,6 +13,13 @@ import { fetchCivitaiImage } from './civitaiApi.mjs';
 export function generationsDataDir () { return `${CONFIG.dataPath}/generations`; }
 export function generationsMediaDir () { return `${CONFIG.mediaPath}/generations`; }
 
+const VIDEO_EXTENSIONS = ['.mp4', '.webm'];
+
+export function isVideoMediaId (mediaId) {
+  const id = String(mediaId).toLowerCase();
+  return VIDEO_EXTENSIONS.some(ext => id.endsWith(ext));
+}
+
 export const WORKFLOW_TAGS = [ 'favorite', 'feedback:liked', 'feedback:disliked' ];
 export const WORKFLOW_TAG_DIRECTORIES = { 'favorite': 'favorite', 'feedback:liked': 'liked', 'feedback:disliked': 'disliked' };
 export const MEDIA_DIRECTORIES = { 'all': 'all', ...WORKFLOW_TAG_DIRECTORIES };
@@ -524,7 +531,7 @@ export async function saveGenerationMedia (generation, { doFetch = true, signal 
         return report;
       }
 
-      if (mediaInfo.mediaId.includes('.')) {
+      if (isVideoMediaId(mediaInfo.mediaId)) {
         report.videosSaved++;
       } else {
         report.imagesSaved++;
